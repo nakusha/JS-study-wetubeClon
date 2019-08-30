@@ -9,6 +9,7 @@ import bodyParser from "body-parser";
 import userRouter from "./Router/userRouter";
 import videoRouter from "./Router/vidoeRouter";
 import globalRouter from "./Router/globalRouter";
+import routes from "./routes"
 
 const app = express();
 
@@ -33,9 +34,9 @@ app.use(morgan("dev"));
 //2.8 Router
 //user로 접속하면 userRouter에 있는 내용을 사용한다.
 //Router은 주소만 정의해놓는것 controller가 아니다.
-app.use("/", globalRouter);
-app.use("/user", userRouter);
-app.use("/video", videoRouter);
+app.use(routes.home, globalRouter);
+app.use(routes.users, userRouter);
+app.use(routes.videos, videoRouter);
 
 export default app;
 
