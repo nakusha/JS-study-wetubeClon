@@ -5,19 +5,13 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+// user import
+import {userRouter} from "./router";
 
 const app = express();
 
-const PORT = 4000;
-
-//arrow function
-const handleListening = () =>
-    console.log(`Listening on: https://localhost:${PORT}`);
-    
-const handleHome = (req, res) => {
-    res.send('Hello form Home');
-    console.log("end");
-};
+// arrow function    
+const handleHome = (req, res) => res.send('Hello form Home');
 const handleProfile = (req, res) => res.send("You are on my profile");
 
 //middle ware
@@ -54,7 +48,10 @@ const middleware = (req, res, next) => {
 app.get("/", handleHome);
 app.get("/profile", handleProfile);
 
-app.listen(PORT, handleListening);
+//2.8 Router
+//user로 접속하면 userRouter에 있는 내용을 사용한다.
+app.use("/user", userRouter);
+
 
 //2.5
 //npm install @babel/node 
@@ -62,3 +59,7 @@ app.listen(PORT, handleListening);
 //npm install을할떄 -D를 붙이면 dependency에 들어가지않고 설치가 됨(devDependencies)
 // npm install nodemon -D
 //"start": "nodemon --exec babel-node index.js" 를하면 저장할때마다 다시 시작이됨 
+
+// 2.8
+// 다른 ㅍ파일에서 app을 import 를 가능하게 해줌
+export default app;
