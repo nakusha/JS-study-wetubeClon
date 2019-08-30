@@ -5,21 +5,12 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-// user import
-import {userRouter} from "./router";
+// user Custom import
+import userRouter from "./Router/userRouter";
+import videoRouter from "./Router/vidoeRouter";
+import globalRouter from "./Router/globalRouter";
 
 const app = express();
-
-// arrow function    
-const handleHome = (req, res) => res.send('Hello form Home');
-const handleProfile = (req, res) => res.send("You are on my profile");
-
-//middle ware
-//next middleware 인경우에만 사용 마지막 함수에는 넣지않아도됨
-const betweenHome = (req, res, next) => {
-    console.log("I'm between");
-    next();
-};
 
 //2.6
 //middle ware를 넣고 router(get, post)를 처리한다.
@@ -38,20 +29,15 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(helmet());
 // npm install morgan 로깅관련
 app.use(morgan("dev"));
-//middle ware가 send를 호출하면 멈춤
-const middleware = (req, res, next) => {
-    res.send("not happening");
-    next();
-};
-
-//router part
-app.get("/", handleHome);
-app.get("/profile", handleProfile);
 
 //2.8 Router
 //user로 접속하면 userRouter에 있는 내용을 사용한다.
+//Router은 주소만 정의해놓는것 controller가 아니다.
+app.use("/", globalRouter);
 app.use("/user", userRouter);
+app.use("/video", videoRouter);
 
+export default app;
 
 //2.5
 //npm install @babel/node 
@@ -62,4 +48,3 @@ app.use("/user", userRouter);
 
 // 2.8
 // 다른 ㅍ파일에서 app을 import 를 가능하게 해줌
-export default app;
