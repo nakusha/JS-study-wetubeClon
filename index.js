@@ -1,7 +1,10 @@
 //const express = require('express');
 // using babel
 import express from "express";
-
+import morgan from "morgan";
+import helmet from "helmet";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 
 const app = express();
 
@@ -28,8 +31,26 @@ const betweenHome = (req, res, next) => {
 //middle ware를 넣고 router(get, post)를 처리한다.
 //router위에 있는middle ware만 적용됨
 
-app.use(betweenHome);
+//app.use(betweenHome);
 
+//2.7 morgan logging middle ware
+//npm install body-parser
+//npm install cookie-parser
+//cookie와 body를 사용하기 편리하게해줌
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+// npm install helmet 보안관련
+app.use(helmet());
+// npm install morgan 로깅관련
+app.use(morgan("dev"));
+//middle ware가 send를 호출하면 멈춤
+const middleware = (req, res, next) => {
+    res.send("not happening");
+    next();
+};
+
+//router part
 app.get("/", handleHome);
 app.get("/profile", handleProfile);
 
