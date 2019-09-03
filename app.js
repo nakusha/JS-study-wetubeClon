@@ -9,6 +9,7 @@ import userRouter from "./Router/userRouter";
 import videoRouter from "./Router/vidoeRouter";
 import globalRouter from "./Router/globalRouter";
 import routes from "./routes"
+import { localsMiddleware } from "./middlewares";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(helmet());              // 보안
 app.use(morgan("dev"));         // 로그
 
+app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
