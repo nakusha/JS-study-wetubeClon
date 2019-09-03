@@ -12,6 +12,7 @@ import routes from "./routes"
 
 const app = express();
 
+app.set('view engine', "pug");      //npm install pug (View Engine)
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));

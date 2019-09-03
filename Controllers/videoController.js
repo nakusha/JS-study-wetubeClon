@@ -1,4 +1,4 @@
-export const home = (req, res) => res.send("HOME");
+export const home = (req, res) => res.render("home");       // render .pug file name default folder path /views
 export const search = (req, res) => res.send("SEARCH");
 
 export const videos = (req, res) => res.send("videos");
