@@ -4,7 +4,7 @@ export const videos = [
         title:"Video1",
         description:"This is something I love",
         views:30,
-        videoFile:"https://archive.org/details/BigBuckBunny_124",
+        videoFile:"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
         creators:{
             id:1231212,
             name:"Nicolas",
@@ -16,7 +16,7 @@ export const videos = [
         title:"Video2",
         description:"This is something I love",
         views:30,
-        videoFile:"https://archive.org/details/BigBuckBunny_124",
+        videoFile:"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
         creators:{
             id:1231212,
             name:"Nicolas",
@@ -28,7 +28,7 @@ export const videos = [
         title:"Video3",
         description:"This is something I love",
         views:30,
-        videoFile:"https://archive.org/details/BigBuckBunny_124",
+        videoFile:"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
         creators:{
             id:1231212,
             name:"Nicolas",
@@ -40,7 +40,7 @@ export const videos = [
         title:"Video4",
         description:"This is something I love",
         views:30,
-        videoFile:"https://archive.org/details/BigBuckBunny_124",
+        videoFile:"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
         creators:{
             id:1231212,
             name:"Nicolas",
@@ -52,7 +52,7 @@ export const videos = [
         title:"Video5",
         description:"This is something I love",
         views:30,
-        videoFile:"https://archive.org/details/BigBuckBunny_124",
+        videoFile:"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
         creators:{
             id:1231212,
             name:"Nicolas",
