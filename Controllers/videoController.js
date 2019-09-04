@@ -1,5 +1,5 @@
-import { runInNewContext } from "vm";
 import { videos } from "../db"
+import routes from "../routes";
 
 export const home = (req, res) => {
     res.render("home", { pageTitle: "Home", videos });       // render .pug file name default folder path /views
@@ -21,4 +21,13 @@ export const search = (req, res) => {
 export const videoDetail = (req, res) => res.render("videoDetail", { pageTitle : "VideoDetail" });
 export const editVideo = (req, res) => res.render("editVideo", { pageTitle : "EditVideo" });
 export const deleteVideo = (req, res) => res.render("deleteVideo", { pageTitle : "Delete Video" });
-export const uploadVideo = (req, res) => res.render("uploadVideo", { pageTitle : "Upload Video" });
+
+
+export const getUploadVideo = (req, res) => res.render("uploadVideo", { pageTitle : "Upload Video" });
+export const postUploadVideo = (req, res) => {
+    const {
+        body: { file, title, description }
+    } = req;
+    // To Do: Upload and Save Video
+    res.redirect(routes.videoDetail(123123));
+};
