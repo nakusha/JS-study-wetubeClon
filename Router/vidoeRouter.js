@@ -5,8 +5,8 @@ import { videos, videoDetail, editVideo, deleteVideo, uploadVideo } from "../Con
 const videoRouter = express.Router();
 
 videoRouter.get(routes.editVideo, editVideo);
-videoRouter.get(routes.deleteVideo, deleteVideo);
+videoRouter.get(routes.deleteVideo(), deleteVideo);
 videoRouter.get(routes.videoUpload, uploadVideo);;
-videoRouter.get(routes.videoDetail, videoDetail);
+videoRouter.get(routes.videoDetail(), videoDetail);
 // 파일전체 export 변수앞에 붙으면 해당 변수만 export
 export default videoRouter;
