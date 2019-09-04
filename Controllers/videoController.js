@@ -1,6 +1,10 @@
 import { runInNewContext } from "vm";
+import { videos } from "../db"
 
-export const home = (req, res) => res.render("home", { pageTitle: "Home" });       // render .pug file name default folder path /views
+export const home = (req, res) => {
+    res.render("home", { pageTitle: "Home", videos });       // render .pug file name default folder path /views
+};
+
 export const search = (req, res) => {
     //ES 6 이전방식
     //const searchingBy = req.query.term;
