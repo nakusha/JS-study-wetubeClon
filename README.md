@@ -3,8 +3,8 @@ JS-study-wetubeClon
 ## Pages:
 
 - [ ] Home
-- [ ] Join
-- [ ] Login
+- [X] Join
+- [X] Login
 - [X] Search
 - [ ] User Detail
 - [ ] Edit Profile
