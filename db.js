@@ -1,62 +1,22 @@
-export const videos = [
+/** Mongo DB Adaptor
+ npm install mongoose 
+ npm install dotenv
+ */
+
+ // connecting db 
+import mongoose from "mongoose";
+
+mongoose.connect("mongodb://localhost:27017/we-tube", 
     {
-        id:3123123,
-        title:"Video1",
-        description:"This is something I love",
-        views:30,
-        videoFile:"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creators:{
-            id:1231212,
-            name:"Nicolas",
-            email:"nicolas@gmail.com"
-        }
-    },
-    {
-        id:3123152,
-        title:"Video2",
-        description:"This is something I love",
-        views:30,
-        videoFile:"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creators:{
-            id:1231212,
-            name:"Nicolas",
-            email:"nicolas@gmail.com"
-        }
-    },
-    {
-        id:3123113,
-        title:"Video3",
-        description:"This is something I love",
-        views:30,
-        videoFile:"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creators:{
-            id:1231212,
-            name:"Nicolas",
-            email:"nicolas@gmail.com"
-        }
-    },
-    {
-        id:3123166,
-        title:"Video4",
-        description:"This is something I love",
-        views:30,
-        videoFile:"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creators:{
-            id:1231212,
-            name:"Nicolas",
-            email:"nicolas@gmail.com"
-        }
-    },
-    {
-        id:3123178,
-        title:"Video5",
-        description:"This is something I love",
-        views:30,
-        videoFile:"https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-        creators:{
-            id:1231212,
-            name:"Nicolas",
-            email:"nicolas@gmail.com"
-        }
+        useNewUrlParser:true,
+        useFindAndModify:false
     }
-]
+);
+
+const db = mongoose.connection;
+
+const handleOpen = () => console.log("Connected to DB");
+const handleError = error => console.log(`Error on Db Connection:${error}`)
+
+db.once("open", handleOpen);
+db.on("error", handleError);
