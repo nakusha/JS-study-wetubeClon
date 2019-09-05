@@ -1,5 +1,8 @@
-import routes from "./routes"
+import routes from "./routes";
+import multer from "multer";
 
+//multer file을 올리면 path가 반환됨
+const multerVideo = multer({dest : "videos/"})
 // pug에서 router에 접그한게 하기위한 middle ware
 export const localsMiddleware = (req, res, next) => {
     res.locals.siteName = 'WeTube';
@@ -10,3 +13,5 @@ export const localsMiddleware = (req, res, next) => {
     };
     next();
 };
+
+export const uploadVideo = multerVideo.single('videoFile')
