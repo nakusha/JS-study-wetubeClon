@@ -1,8 +1,15 @@
-import { videos } from "../db"
 import routes from "../routes";
+import Video from "../models/Video";
 
-export const home = (req, res) => {
-    res.render("home", { pageTitle: "Home", videos });       // render .pug file name default folder path /views
+//async
+export const home = async(req, res) => {
+    try{
+        const videos = await Video.find({});
+        res.render("home", { pageTitle: "Home", videos });       // render .pug file name default folder path /views
+    }catch(error){
+        console.log(error);
+        res.render("home", { pageTitle:" Home", videos: []});
+    }
 };
 
 export const search = (req, res) => {
