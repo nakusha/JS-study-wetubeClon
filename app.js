@@ -14,6 +14,7 @@ import { localsMiddleware } from "./middlewares";
 const app = express();
 
 app.set('view engine', "pug");      //npm install pug (View Engine)
+app.use("/uploads", express.static("uploads"))   // file을 전달하는 middleware
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
