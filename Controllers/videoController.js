@@ -25,7 +25,21 @@ export const search = (req, res) => {
     res.render("search", { pageTitle: "search", searchingBy, videos });
 };
 
-export const videoDetail = (req, res) => res.render("videoDetail", { pageTitle : "VideoDetail" });
+export const videoDetail = async(req, res) => {
+    const {
+        params: { id }
+    } = req;
+    try{
+        const video = await Video.findById(id);
+        console.log(video);
+        res.render("videoDetail", { pageTitle : "VideoDetail", video });
+    }catch(error){
+        console.log(error.description);
+        res.redirect(routes.home);
+    }
+    
+};
+
 export const editVideo = (req, res) => res.render("editVideo", { pageTitle : "EditVideo" });
 export const deleteVideo = (req, res) => res.render("deleteVideo", { pageTitle : "Delete Video" });
 
