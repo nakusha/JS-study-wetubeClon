@@ -12,7 +12,7 @@ export const home = async(req, res) => {
     }
 };
 
-export const search = (req, res) => {
+export const search = async(req, res) => {
     //ES 6 이전방식
     //const searchingBy = req.query.term;
     //ES 6 방식
@@ -21,7 +21,14 @@ export const search = (req, res) => {
         // term의 이름을 바꿔줌
         query:{ term:searchingBy }
     } = req;
-    
+    let videos = [];
+    try{
+        videos = await Video.find({ 
+            title: { $regex: searchingBy, $options: "i" } 
+        });
+    }catch (error){
+        console.log(error.description);
+    }
     res.render("search", { pageTitle: "search", searchingBy, videos });
 };
 
