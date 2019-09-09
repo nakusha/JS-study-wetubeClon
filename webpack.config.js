@@ -4,6 +4,8 @@
 //npm install autoprefixer
 //npm install css-loader postcss-loader sass-loader
 //npm install node-sass
+//npm install babel-loader
+//npm install @babel/polyfill
 
 const path = require("path");
 const ExtractCSS = require("extract-text-webpack-plugin");
@@ -14,10 +16,18 @@ const ENTRTY_FILE = path.resolve(__dirname, "assets", "js", "main.js"); //파일
 const OUTPUT_DIR = path.join(__dirname, "static") // DIR join
 
 const config = {
-    entry: ENTRTY_FILE,
+    entry: ["@babel/polyfill", ENTRTY_FILE],
     mode: MODE,
     module: {
         rules: [
+            {
+                test: /\.(js)$/,
+                use: [
+                    {
+                        loader: "babel-loader"
+                    }
+                ]
+            },
             {
                 test: /\.(scss)$/,
                 use: ExtractCSS.extract([
