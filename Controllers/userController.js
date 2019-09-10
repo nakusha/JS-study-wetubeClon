@@ -1,3 +1,4 @@
+import passport from "passport";
 import routes from "../routes";
 import User from "../models/User";
 
@@ -5,7 +6,7 @@ export const getJoin = (req, res) => {
     res.render("join");
 };
 
-export const postJoin = async (req, res) => {
+export const postJoin = async (req, res, next) => {
     //body parser에 의하여 정상적으로 console log에 찍힘
     console.log(req.body);
     const {
@@ -23,11 +24,11 @@ export const postJoin = async (req, res) => {
                 email
             });
             await User.register(user, password);
+            next();
         }catch(error){
             console.log(error);
+            res.redirect(routes.home);
         }
-        // To Do: Log user In
-        res.redirect(routes.home);
     }
     
 };
@@ -36,9 +37,10 @@ export const getLogin = (req, res) => {
     res.render("login");
 };
 
-export const postLogin = (req, res) => {
-    res.redirect(routes.home);
-};
+export const postLogin = passport.authenticate('local', {
+    failureRedirect: routes.login,
+    successRedirect: routes.home
+});
 
 export const logout = (req, res) => {
     // To Do: Process Logout
