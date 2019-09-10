@@ -1,10 +1,11 @@
 import routes from "../routes";
+import User from "../models/User";
 
 export const getJoin = (req, res) => {
     res.render("join");
 };
 
-export const postJoin = (req, res) => {
+export const postJoin = async (req, res) => {
     //body parser에 의하여 정상적으로 console log에 찍힘
     console.log(req.body);
     const {
@@ -15,7 +16,16 @@ export const postJoin = (req, res) => {
         res.status(400);
         res.render("join", {pageTitle: "Join"});
     }else{
-        // To Do: Register User
+        // Register User
+        try{
+            const user = await User.create({
+                name,
+                email
+            });
+            await User.register(user, password);
+        }catch(error){
+            console.log(error);
+        }
         // To Do: Log user In
         res.redirect(routes.home);
     }
