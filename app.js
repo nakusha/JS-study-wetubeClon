@@ -6,6 +6,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
+import session from "express-session";
 import userRouter from "./Router/userRouter";
 import videoRouter from "./Router/vidoeRouter";
 import globalRouter from "./Router/globalRouter";
@@ -23,8 +24,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(helmet());              // 보안
 app.use(morgan("dev"));         // 로그
+app.use(session({
+        secret: process.env.COOKIE_SECRET,
+        resave: true,
+        saveUninitialized: false
+    })
+);
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session());        //npm install express-session 설치가 필요
 
 app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
