@@ -2,12 +2,13 @@
 import express from "express";
 import routes from "../routes"
 import { userDetail, editProfile, changePassword } from "../Controllers/userController";
+import { onlyPrivate } from "../middlewares";
 
 const userRouter = express.Router();
 
 // :id 떄문에 /users/edit-profile을 하면id로 인식해서 editprofile가 안떳었음
-userRouter.get(routes.editProfile, editProfile);
-userRouter.get(routes.changePassword, changePassword);
+userRouter.get(routes.editProfile, onlyPrivate, editProfile);
+userRouter.get(routes.changePassword, onlyPrivate, changePassword);
 userRouter.get(routes.userDetail(), userDetail);
 
 

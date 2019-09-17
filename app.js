@@ -1,12 +1,15 @@
 //const express = require('express');
 // using babel
+//npm install connect-mongo
 import express from "express";
 import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
+import mongoose from "mongoose";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import userRouter from "./Router/userRouter";
 import videoRouter from "./Router/vidoeRouter";
 import globalRouter from "./Router/globalRouter";
@@ -15,6 +18,8 @@ import { localsMiddleware } from "./middlewares";
 import "./passport";
 
 const app = express();
+
+const CookieStore = MongoStore(session);
 
 app.set('view engine', "pug");      //npm install pug (View Engine)
 app.use("/uploads", express.static("uploads"));   // file을 전달하는 middleware
@@ -27,7 +32,8 @@ app.use(morgan("dev"));         // 로그
 app.use(session({
         secret: process.env.COOKIE_SECRET,
         resave: true,
-        saveUninitialized: false
+        saveUninitialized: false,
+        store: new CookieStore({ mongooseConnection: mongoose.connection })     // save cookie in mongodb
     })
 );
 app.use(passport.initialize());
