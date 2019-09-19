@@ -49,19 +49,19 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
             user.githubId = id;
             user.save();
             return cb(null, user);
-        }else{
-            const newUser = await User.create({
-                email,
-                name,
-                githubId: id,
-                avatarUrl : avatar_url
-            });
-            return cb(null, newUser);
         }
+        const newUser = await User.create({
+            email,
+            name,
+            githubId: id,
+            avatarUrl : avatar_url
+        });
+        return cb(null, newUser);
+        
     }catch(error){
         return cb(error);
     }
-}
+};
 
 export const githubLogin = passport.authenticate("github");
 
